@@ -15,5 +15,5 @@ func (s *HelloImpl) Echo(ctx context.Context, req *api.Request) (resp *api.Respo
 
 // Hello implements the HelloImpl interface.
 func (s *HelloImpl) Hello(ctx context.Context, req string) (resp string, err error) {
-	return req, nil
+	return "hello", nil
 }
