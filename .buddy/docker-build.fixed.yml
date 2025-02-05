@@ -13,3 +13,4 @@
     docker_registry: DOCKER_HUB
     repository: $BUDDY_PROJECT_NAME_ID
     do_not_prune_images: true
+    pull: false
