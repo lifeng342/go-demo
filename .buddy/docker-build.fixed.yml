@@ -8,8 +8,8 @@
   - action: Build Docker image
     type: DOCKERFILE
     integration: Docker_Hub
-    docker_image_tag: $BUDDY_RUN_TAG
+    docker_image_tag: 1
     dockerfile_path: dockerfile
     docker_registry: DOCKER_HUB
-    repository: $BUDDY_RUN_COMMIT_SHORT
+    repository: go_demo_$BUDDY_RUN_COMMIT_SHORT
     do_not_prune_images: true
