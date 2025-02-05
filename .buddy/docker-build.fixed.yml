@@ -1,0 +1,15 @@
+- pipeline: docker build
+  events:
+  - type: PUSH
+    refs:
+    - refs/heads/main
+  fail_on_prepare_env_warning: true
+  actions:
+  - action: Build Docker image
+    type: DOCKERFILE
+    integration: Docker_Hub
+    docker_image_tag: $BUDDY_RUN_TAG
+    dockerfile_path: dockerfile
+    docker_registry: DOCKER_HUB
+    repository: $BUDDY_RUN_COMMIT_SHORT
+    do_not_prune_images: true
