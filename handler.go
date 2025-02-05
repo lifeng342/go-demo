@@ -12,3 +12,8 @@ type HelloImpl struct{}
 func (s *HelloImpl) Echo(ctx context.Context, req *api.Request) (resp *api.Response, err error) {
 	return &api.Response{Message: req.GetMessage()}, nil
 }
+
+// Hello implements the HelloImpl interface.
+func (s *HelloImpl) Hello(ctx context.Context, req string) (resp string, err error) {
+	return req, nil
+}

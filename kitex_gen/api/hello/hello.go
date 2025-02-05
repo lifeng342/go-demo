@@ -20,6 +20,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingNone),
 	),
+	"Hello": kitex.NewMethodInfo(
+		helloHandler,
+		newHelloHelloArgs,
+		newHelloHelloResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
 }
 
 var (
@@ -104,6 +111,24 @@ func newHelloEchoResult() interface{} {
 	return api.NewHelloEchoResult()
 }
 
+func helloHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*api.HelloHelloArgs)
+	realResult := result.(*api.HelloHelloResult)
+	success, err := handler.(api.Hello).Hello(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newHelloHelloArgs() interface{} {
+	return api.NewHelloHelloArgs()
+}
+
+func newHelloHelloResult() interface{} {
+	return api.NewHelloHelloResult()
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -119,6 +144,16 @@ func (p *kClient) Echo(ctx context.Context, req *api.Request) (r *api.Response, 
 	_args.Req = req
 	var _result api.HelloEchoResult
 	if err = p.c.Call(ctx, "Echo", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) Hello(ctx context.Context, req string) (r string, err error) {
+	var _args api.HelloHelloArgs
+	_args.Req = req
+	var _result api.HelloHelloResult
+	if err = p.c.Call(ctx, "Hello", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

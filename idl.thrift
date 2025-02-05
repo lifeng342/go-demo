@@ -10,4 +10,5 @@ struct Response {
 
 service Hello {
     Response Echo(1: Request req)
+    string Hello(string req)
 }
