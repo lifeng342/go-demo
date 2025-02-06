@@ -10,6 +10,10 @@ WORKDIR /app
 # RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 # RUN git config --global url."ssh://git@github.com/lifeng342/".insteadOf "https://github.com/lifeng342"
 ENV GOPRIVATE=github.com/lifeng342/**
+
+# 设置访问令牌作为构建环境变量
+ARG GIT_USER
+ARG GIT_ACCESS_TOKEN
 RUN git config --global url."https://${GIT_USER}:${GIT_ACCESS_TOKEN}@github.com/lifeng342/".insteadOf "https://github.com/lifeng342/"
 ENV GOPROXY=goproxy.cn
 
