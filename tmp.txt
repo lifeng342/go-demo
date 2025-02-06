@@ -2,7 +2,7 @@
 FROM --platform=linux/amd64 golang:1.23
 
 # 更新并安装必需的包
-RUN apt-get update && apt-get install -y git openssh-client
+RUN apt-get update && apt-get install -y git openssh-client ssh sshpass
 
 # 设置工作目录
 WORKDIR /code

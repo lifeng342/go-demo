@@ -5,17 +5,17 @@ FROM --platform=linux/amd64 golang:1.23
 WORKDIR /app
 
 # 更新并安装必需的包
-RUN apt-get update && apt-get install -y git
-
-RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
-RUN git config --global url."ssh://git@github.com/lifeng342/".insteadOf "https://github.com/lifeng342"
+# RUN apt-get update && apt-get install -y git openssh-client ssh sshpass
+#
+# RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+# RUN git config --global url."ssh://git@github.com/lifeng342/".insteadOf "https://github.com/lifeng342"
 ENV GOPRIVATE=github.com/lifeng342/**
+RUN git config --global url."https://lifeng342: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@github.com/lifeng342/".insteadOf "https://github.com/lifeng342/"
 ENV GOPROXY=goproxy.cn
 
 COPY go.mod go.mod
 COPY go.sum go.sum
-RUN --mount=type=ssh \
-    go mod download
+RUN go mod download
 
 # 将当前目录的内容复制到 `/code` 目录下
 COPY ./ /app
