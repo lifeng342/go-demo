@@ -13,4 +13,7 @@
     docker_registry: DOCKER_HUB
     repository: $BUDDY_PROJECT_NAME_ID
     do_not_prune_images: true
+    build_args:
+    - GIT_USER=lifeng342
+    - GIT_ACCESS_TOKEN=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
     pull: false
