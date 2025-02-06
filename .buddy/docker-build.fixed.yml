@@ -17,7 +17,7 @@
   - action: Build Docker image
     type: DOCKERFILE
     integration: Docker_Hub
-    docker_image_tag: $BUDDY_RUN_COMMIT_SHORT
+    docker_image_tag: $BUILD_DATE-$BUDDY_RUN_COMMIT_SHORT
     dockerfile_path: dockerfile
     docker_registry: DOCKER_HUB
     repository: $BUDDY_PROJECT_NAME_ID
