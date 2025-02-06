@@ -10,7 +10,7 @@ WORKDIR /app
 # RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 # RUN git config --global url."ssh://git@github.com/lifeng342/".insteadOf "https://github.com/lifeng342"
 ENV GOPRIVATE=github.com/lifeng342/**
-RUN git config --global url."https://lifeng342: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@github.com/lifeng342/".insteadOf "https://github.com/lifeng342/"
+RUN git config --global url."https://${GIT_USER}:${GIT_ACCESS_TOKEN}@github.com/lifeng342/".insteadOf "https://github.com/lifeng342/"
 ENV GOPROXY=goproxy.cn
 
 COPY go.mod go.mod
