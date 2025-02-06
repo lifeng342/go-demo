@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	api "github.com/lifeng342/go-demo/kitex_gen/api"
+	"github.com/lifeng342/pkg-demo"
 )
 
 // HelloImpl implements the last service interface defined in the IDL.
@@ -15,5 +16,5 @@ func (s *HelloImpl) Echo(ctx context.Context, req *api.Request) (resp *api.Respo
 
 // Hello implements the HelloImpl interface.
 func (s *HelloImpl) Hello(ctx context.Context, req string) (resp string, err error) {
-	return "hello", nil
+	return pkg_demo.ToString(req), nil
 }
