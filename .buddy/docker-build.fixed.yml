@@ -5,12 +5,24 @@
         - refs/heads/main
   fail_on_prepare_env_warning: true
   actions:
-    - action: Build Docker image
-      type: DOCKERFILE
-      integration: Docker_Hub
-      docker_image_tag: $BUDDY_RUN_COMMIT_SHORT
-      dockerfile_path: dockerfile
-      docker_registry: DOCKER_HUB
-      repository: $BUDDY_PROJECT_NAME_ID
-      do_not_prune_images: true
-      pull: false
+  - action: echo $BUILD_DATE
+    type: BUILD
+    docker_image_name: buddy/localshell
+    docker_image_tag: ubuntu_24.04
+    execute_commands:
+    - current_date=$(date +'%Y_%m_%d')
+    - export BUILD_DATE=$current_date
+    - echo $BUILD_DATE
+    shell: BASH
+  - action: Build Docker image
+    type: DOCKERFILE
+    integration: Docker_Hub
+    docker_image_tag: $BUILD_DATE-$BUDDY_RUN_COMMIT_SHORT
+    dockerfile_path: dockerfile
+    docker_registry: DOCKER_HUB
+    repository: $BUDDY_PROJECT_NAME_ID
+    do_not_prune_images: true
+    build_args:
+    - GIT_USER=$GIT_USER
+    - GIT_ACCESS_TOKEN=$GIT_ACCESS_TOKEN
+    pull: false
