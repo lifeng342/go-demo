@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
+	//Replace()
+	ChatComplete()
 	svr := api.NewServer(new(HelloImpl))
 
 	err := svr.Run()

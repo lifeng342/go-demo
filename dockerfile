@@ -6,20 +6,20 @@ WORKDIR /app
 
 # 更新并安装必需的包
 # RUN apt-get update && apt-get install -y git openssh-client ssh sshpass
-#
-# RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
-# RUN git config --global url."ssh://git@github.com/lifeng342/".insteadOf "https://github.com/lifeng342"
+
+RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+RUN git config --global url."ssh://git@github.com/lifeng342".insteadOf "https://github.com/lifeng342"
 ENV GOPRIVATE=github.com/lifeng342/**
 
 # 设置访问令牌作为构建环境变量
 ARG GIT_USER
 ARG GIT_ACCESS_TOKEN
-RUN git config --global url."https://${GIT_USER}:${GIT_ACCESS_TOKEN}@github.com/lifeng342/".insteadOf "https://github.com/lifeng342/"
-ENV GOPROXY=goproxy.cn
+# RUN git config --global url."https://${GIT_USER}:${GIT_ACCESS_TOKEN}@github.com/lifeng342/".insteadOf "https://github.com/lifeng342/"
+# ENV GOPROXY=goproxy.cn
 
 COPY go.mod go.mod
 COPY go.sum go.sum
-RUN go mod download
+RUN --mount=type=ssh go mod download
 
 # 将当前目录的内容复制到 `/code` 目录下
 COPY ./ /app

@@ -8,6 +8,9 @@ require (
 	github.com/cloudwego/gopkg v0.1.3
 	github.com/cloudwego/kitex v0.12.1
 	github.com/cloudwego/kitex/pkg/protocol/bthrift v0.0.0-20250124072755-047444c8e964
+	github.com/expr-lang/expr v1.16.9
+	github.com/lifeng342/pkg-demo v0.0.0-20250206031021-1efafd87f903
+	github.com/sashabaranov/go-openai v1.37.0
 )
 
 require (
@@ -33,7 +36,6 @@ require (
 	github.com/jhump/protoreflect v1.8.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
-	github.com/lifeng342/pkg-demo v0.0.0-20250206031021-1efafd87f903 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/gls v0.0.0-20220109145502-612d0167dce5 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
